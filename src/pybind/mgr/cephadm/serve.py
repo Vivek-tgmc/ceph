@@ -404,8 +404,6 @@ class CephadmServe:
             inventory_args.insert(-1, "--with-lsm")
         if list_all:
             inventory_args.insert(-1, "--list-all")
-        log.debug(f"[vivek] Referesh devices {host} with log-level: {self.mgr.ceph_volume_log_level}")
-        log.debug(f"[vivek] Inv cmd : {' '.join(inventory_args)}")
         try:
             try:
                 with self.mgr.async_timeout_handler(host, f'cephadm ceph-volume --log-level {self.mgr.ceph_volume_log_level} -- inventory'):

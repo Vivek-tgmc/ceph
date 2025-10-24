@@ -1,3 +1,13 @@
+# syntax=docker/dockerfile:1.4
+
+# ----------------------------------------------------------------------
+# STAGE 0: Host Files Staging (The Patch Source)
+# ----------------------------------------------------------------------
+FROM scratch AS host_mgr_files
+
+# This COPY command REQUIRES the '--external' build option.
+COPY /usr/local/share/ceph/mgr/cephadm /usr/share/ceph/mgr/cephadm
+# ----------------------------------------------------------------------
 ARG FROM_IMAGE="quay.io/centos/centos:stream9"
 FROM $FROM_IMAGE
 
@@ -226,4 +236,9 @@ ENV CEPH_IS_DEVEL="${CI_CONTAINER}" \
     CEPH_VERSION="${CEPH_REF}" \
     CEPH_OSD_FLAVOR="${OSD_FLAVOR}" \
     FROM_IMAGE="${FROM_IMAGE}"
+# ... (Inside the final build stage, near the end) ...
 
+# PATCH: Copy files from the mount point created by the --volume flag.
+# Source: /host-patch/mgr/cephadm/ (relative to the mounted volume root)
+# Destination: /usr/share/ceph/mgr/cephadm/ (inside the container image)
+COPY /host-patch/mgr/cephadm /usr/share/ceph/mgr/cephadm
