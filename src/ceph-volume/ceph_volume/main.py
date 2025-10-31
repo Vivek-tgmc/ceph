@@ -158,7 +158,7 @@ Ceph Conf: {ceph_path}
         log.setup(log_level=args.log_level)
         log.setup_console()
         logger = logging.getLogger(__name__)
-        logger.info("Running command: ceph-volume %s %s", " ".join(main_args), " ".join(subcommand_args))
+        logger.critical("Running command: ceph-volume %s %s (Log Level Vivek:)%s", " ".join(main_args), " ".join(subcommand_args), args.log_level)
         # set all variables from args and load everything needed according to
         # them
         configuration.load_ceph_conf_path(cluster_name=args.cluster)
