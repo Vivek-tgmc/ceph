@@ -396,7 +396,7 @@ class CephadmServe:
     def _refresh_host_devices(self, host: str) -> Optional[str]:
         with_lsm = self.mgr.device_enhanced_scan
         list_all = self.mgr.inventory_list_all
-        inventory_args = ['--','--log-level',·self.mgr.ceph_volume_log_level,
+        inventory_args = ['--', '--log-level', self.mgr.ceph_volume_log_level,
                           'inventory',
                           '--format=json-pretty',
                           '--filter-for-batch']

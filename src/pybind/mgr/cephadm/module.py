@@ -2937,7 +2937,7 @@ Then run the following:
                     f"OSD{'s' if len(active_osds) > 1 else ''}"
                     f" ({', '.join(active_osds)}). Use 'ceph orch osd rm' first.")
 
-        cv_args = ['--','--log-level',·self.ceph_volume_log_level,·'lvm', 'zap', '--destroy', path]
+        cv_args = ['--', '--log-level', self.ceph_volume_log_level, 'lvm', 'zap', '--destroy', path]
         with self.async_timeout_handler(host, f'cephadm ceph-volume {" ".join(cv_args)}'):
             out, err, code = self.wait_async(CephadmServe(self)._run_cephadm(
                 host, 'osd', 'ceph-volume', cv_args, error_ok=True))

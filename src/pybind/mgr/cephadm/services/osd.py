@@ -382,7 +382,7 @@ class OSDService(CephService):
         })
 
         split_cmd = cmd.split(' ')
-        _cmd = ['--config-json', '-', '--','--log-level',·self.mgr.ceph_volume_log_level]
+        _cmd = ['--config-json', '-', '--', '--log-level', self.mgr.ceph_volume_log_level]
         _cmd.extend(split_cmd)
         out, err, code = await CephadmServe(self.mgr)._run_cephadm(
             host, 'osd', 'ceph-volume',
